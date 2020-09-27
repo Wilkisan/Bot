@@ -1,0 +1,38 @@
+// ==UserScript==
+// @name         Сrash_v_yandex
+// @namespace    http://tampermonkey.net/
+// @version      0.1
+// @description  try to take over the world!
+// @author       You
+// @match        https://yandex.ru/*
+// @grant        none
+// ==/UserScript==
+
+let yaInput = document.getElementsByName("text")[0];
+let yaBtn = document.querySelector('button.mini-suggest__button.button_theme_websearch.button_size_ws-head.i-bem.button_js_inited');
+let keywords = ["Гобой","Саксофон","Валторна","Фагот","Скрипка","Флейта","Как звучит флейта"];
+let keyword = keywords[getRandom(0,keywords.length)];
+let i = 0;
+
+function getRandom(min,max){
+    return Math.floor(Math.random()*(max-min)+min);
+}
+
+
+if(yaBtn!=undefined){
+    let timerId = setInterval(()=>{
+        yaInput.value += keyword[i++];
+        if (i==keyword.length){
+            clearInterval(timerId);
+            document.querySelector('button.mini-suggest__button.button_theme_websearch.button_size_ws-head.i-bem.button_js_inited').click();
+        }
+    },500);
+}else{
+    let links = document.links;
+    for(let i=0; i<links.length; i++){
+        if(links[i].href.indexOf("xn----7sbab5aqcbiddtdj1e1g.xn--p1ai")!= -1){
+            links[i].click();
+            break;
+        }
+    }
+}
