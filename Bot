@@ -52,7 +52,7 @@ if(yaBtn!=undefined){
 }else if(location.hostname == "yandex.ru"){
     let links = document.links;
     let flag = true;
-    let numPage = document.querySelector('.pager__item_current_yes').innerText;
+    let numPage = document.querySelector('.pager__item.pager__item_current_yes.pager__item_kind_page').innerText;
     for(let i = 0; i<links.length; i++){
         if(links[i].href.indexOf(site) != -1){
             links[i].removeAttribute('target');
@@ -61,7 +61,7 @@ if(yaBtn!=undefined){
             break;
         }
     }
-    let nextPage = document.querySelector('.link_target_serp').innerText;
+    let nextPage = document.querySelector(".pager__item_kind_next");
     if(numPage=="10") location.href = "https://yandex.ru/";
     if(flag)setInterval(()=>nextPage.click(),2000);
 }else{
